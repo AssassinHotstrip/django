@@ -42,10 +42,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'users.apps.UsersConfig', #安装users子应用
+    #注册安装users子应用
+    'users.apps.UsersConfig',
     'request_response.apps.RequestResponseConfig',
     'class_view.apps.ClassViewConfig',
+    'booktest.apps.BooktestConfig',
 
+    # 注册应用的目的：如果应用需要使用模型迁移建表操作，必须要注册刺应用，不然无法迁移表
+    # 如果应用只有视图的业务逻辑，可以不用注册，因为视图纸盒路由相关
 ]
 
 # 中间件，类似flask中的请求勾子
@@ -88,12 +92,24 @@ WSGI_APPLICATION = 'demo.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 # 数据库配置项，默认为sqlite3
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': '127.0.0.1',  # 数据库主机
+        'PORT': 3306,  # 数据库端口
+        'USER': 'root',  # 数据库用户名
+        'PASSWORD': 'mysql',  # 数据库用户密码
+        'NAME': 'django_demo'  # 数据库名字
     }
 }
+
+
 
 
 # Password validation
@@ -118,10 +134,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 # 本地化语言，默认英文'en-us'， 可改成中文zh-Hans
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
-# 时区，默认世界时间， 可改成亚洲/上海 ‘Asia/Shanghai’
-TIME_ZONE = 'UTC'
+# 时区，默认世界时间'UTC'， 可改成亚洲/上海 ‘Asia/Shanghai’
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -151,7 +167,7 @@ CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
         #                        自己的ip地址/redis数据库编号
-        "LOCATION": "redis://192.168.14.117/1",
+        "LOCATION": "redis://127.0.0.1:6379/1",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
@@ -159,3 +175,10 @@ CACHES = {
 }
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
+
+# 配置该工程下的图盘存放总路径
+MEDIA_ROOT=os.path.join(BASE_DIR,"static_files/media")
+
+# testsuperusername: admin
+# psw:qwer1234
+# email:27955...
