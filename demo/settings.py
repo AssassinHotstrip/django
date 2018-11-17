@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # 第三方应用
+    'rest_framework',  # 注册DRF
+
     #注册安装users子应用
     'users.apps.UsersConfig',
     'request_response.apps.RequestResponseConfig',

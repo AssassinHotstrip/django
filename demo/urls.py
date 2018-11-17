@@ -26,4 +26,7 @@ urlpatterns = [
     url(r'^', include('request_response.urls', namespace='request_response')),
     # 包含class_view应用的路由
     url(r'^', include('class_view.urls')),
+
+    url(r'^', include('booktest.urls')),
+
 ]
