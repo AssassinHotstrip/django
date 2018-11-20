@@ -30,8 +30,8 @@ class BookInfoSerializer(serializers.Serializer):
 
     def validate_btitle(self, value):
         """给单个字段额外增加校验逻辑"""
-        if 'django' not in value.lower():
-            raise serializers.ValidationError("图书不是关于Django的")
+        # if 'django' not in value.lower():
+        #     raise serializers.ValidationError("图书不是关于Django的")
         return value
 
 
